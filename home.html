@@ -9,12 +9,30 @@
 <body>
   <header>
     <h1>TV Mount Master</h1>
+    <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+      <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+        <mask class="moon" id="moon-mask">
+          <rect x="0" y="0" width="100%" height="100%" fill="white" />
+          <circle cx="24" cy="10" r="6" fill="black" />
+        </mask>
+        <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
+        <g class="sun-beams" stroke="currentColor">
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </g>
+      </svg>
+    </button>
     <nav>
       <a href="home.html">Home</a>
       <a href="services.html">Services</a>
       <a href="booking.html">Book Now</a>
       <a href="contact.html">Contact</a>
-      <button id="dark-mode-toggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">🌙</button>
     </nav>
   </header>
 
@@ -25,18 +43,18 @@
       <a href="booking.html" class="button-cta">Book Your Appointment</a>
     </section>
 
-    <section id="services-teaser">
+    <section class="js-animate" id="services-teaser">
       <h2>Our Services</h2>
       <div class="services">
-        <article class="service-card">
+        <article class="service-card js-animate">
           <h3>TV Mounting</h3>
           <p>Secure and clean installation for all TV sizes and wall types.</p>
         </article>
-        <article class="service-card">
+        <article class="service-card js-animate">
           <h3>Home Theater Setup</h3>
           <p>Professional wiring and installation for immersive sound and video.</p>
         </article>
-        <article class="service-card">
+        <article class="service-card js-animate">
           <h3>Audio System Setup</h3>
           <p>Configure speakers, receivers, and smart home integration.</p>
         </article>

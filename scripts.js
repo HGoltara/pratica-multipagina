@@ -1,19 +1,16 @@
 // scripts.js
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Dark Mode Toggle
-  const toggleBtn = document.getElementById('dark-mode-toggle');
+  const toggleBtn = document.getElementById('theme-toggle');
   const body = document.body;
 
   function enableDarkMode() {
     body.classList.add('dark-mode');
-    toggleBtn.textContent = '☀️';
     localStorage.setItem('darkMode', 'enabled');
   }
 
   function disableDarkMode() {
     body.classList.remove('dark-mode');
-    toggleBtn.textContent = '🌙';
     localStorage.setItem('darkMode', 'disabled');
   }
 
@@ -372,4 +369,29 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   document.querySelector('.carousel-next').addEventListener('click', nextSlide);
   document.querySelector('.carousel-prev').addEventListener('click', prevSlide);
+
+  // Animate elements on scroll (fade in/up)
+  const animatedEls = document.querySelectorAll('.js-animate');
+
+  function animateOnScroll() {
+    animatedEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 60) {
+        el.classList.add('animated');
+      }
+    });
+  }
+
+  // Initial check
+  animateOnScroll();
+
+  // On scroll
+  window.addEventListener('scroll', animateOnScroll);
+
+  // Animate navigation links on load
+  navLinks.forEach((link, i) => {
+    setTimeout(() => {
+      link.classList.add('animated');
+    }, 150 + i * 120);
+  });
 });

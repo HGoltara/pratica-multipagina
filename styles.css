@@ -55,8 +55,9 @@ body.dark-mode nav,
 body.dark-mode nav ul,
 body.dark-mode nav a {
   background-color: #23272a !important;
-  color: #f1f1f1 !important;
+  color: #ffd700 !important;
   transition: background-color 0.3s, color 0.3s;
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.08);
 }
 
 body.dark-mode nav a:hover,
@@ -85,16 +86,130 @@ footer {
   }
 }
 
+/* --- Animations for a prettier website --- */
+
+/* Fade in for main content */
+.container,
+section,
+header,
+footer {
+  animation: fadeIn 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle scale-up on cards and testimonials */
+.service-card,
+.testimonial {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s;
+  will-change: transform;
+}
+
+.service-card:hover,
+.testimonial:hover {
+  transform: scale(1.035) translateY(-6px);
+  box-shadow: 0 16px 48px rgba(56, 189, 248, 0.13);
+}
+
+/* Button pop effect */
+.button-cta {
+  transition: background-color 0.3s, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.08);
+}
+
+.button-cta:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.18);
+}
+
+/* Fade in for nav links */
+nav a {
+  color: #111 !important;
+  background: transparent;
+  transition: color 0.3s;
+  /* Remove opacity and transform here */
+}
+
+nav a:hover,
+nav a:focus {
+  color: #0ea5e9;
+  background: rgba(56,189,248,0.08);
+}
+
+/* Dark mode: nav links are white */
+body.dark-mode nav a {
+  color: #fff !important;
+  background: transparent;
+}
+
+nav a.animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+nav a:not(.animated) {
+  opacity: 0;
+  transform: translateY(-16px);
+}
+
+/* Theme toggle button pop-in */
+.theme-toggle {
+  animation: popIn 0.7s 0.2s backwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7) rotate(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Smooth transitions for color and background changes */
+body,
+header,
+footer,
+.container,
+nav,
+.theme-toggle,
+.button-cta,
+.service-card,
+.testimonial {
+  transition:
+    background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* NAVIGATION STYLES */
 nav {
+  position: static; /* Ensure nav is in normal flow */
+  margin-top: 0;
+  margin-right: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   background-color: transparent !important;
   padding: 0.5rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   min-height: 3.5rem;
   transition: background-color var(--transition-smooth);
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 nav ul {
@@ -108,13 +223,8 @@ nav ul {
 nav a {
   color: #111 !important;
   background: transparent;
-  margin: 0 12px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color var(--transition-fast);
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  transition: color 0.3s;
+  /* Remove opacity and transform here */
 }
 
 nav a:hover,
@@ -338,20 +448,33 @@ form button:hover {
 }
 
 /* Dark Mode Toggle Button Styles */
+/* Professional dark mode toggle button in header top-right */
 #dark-mode-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
-  margin-left: 1rem;
+  padding: 0.3em 0.5em;
+  border-radius: 50%;
   color: #333;
   transition: color 0.2s, background 0.2s;
-  border-radius: 50%;
-  padding: 0.3em 0.5em;
+  z-index: 10;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dark-mode-toggle svg {
+  display: block;
+  width: 2rem;
+  height: 2rem;
 }
 
 #dark-mode-toggle:hover,
-#dark-mode-toggle:focus {
+#dark-mode_toggle:focus {
   background: #f0f0f0;
   color: #0078d7;
   outline: none;
@@ -363,28 +486,121 @@ body.dark-mode #dark-mode-toggle {
 }
 
 body.dark-mode #dark-mode-toggle:hover,
-body.dark-mode #dark-mode-toggle:focus {
+body.dark-mode #dark-mode_toggle:focus {
   background: #333;
   color: #fff;
 }
 
+/* Professional theme toggle button in header top-right */
+.theme-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  border-radius: 50%;
+  color: #333;
+  transition: color 0.2s, background 0.2s;
+  z-index: 10;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle svg {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background: #f0f0f0;
+  color: #000000;
+  outline: none;
+}
+
+body.dark-mode .theme-toggle {
+  color: #ffd700;
+  background: #222;
+}
+
+body.dark-mode .theme-toggle:hover,
+body.dark-mode .theme-toggle:focus {
+  background: #333;
+  color: #fff;
+}
+
+/* Enhanced, professional header styling */
+header {
+  position: relative;
+  padding-top: 3.5rem; /* Prevent overlap with toggle */
+  padding-bottom: 1.5rem;
+  background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(14, 165, 233, 0.08);
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.dark-mode header {
+  background: linear-gradient(90deg, #23272a 0%, #181a1b 100%);
+  color: #f1f1f1;
+  box-shadow: 0 4px 24px rgba(30, 41, 59, 0.18);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0 0 0.5rem 0;
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
+  transition: color 0.3s;
+}
+
+body.dark-mode header h1 {
+  color: #ffd700 !important;
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.08);
+}
+
+header nav {
+  margin-top: 1rem;
+}
+
+.theme-toggle {
+  /* Already styled, but add a subtle shadow for emphasis */
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.12);
+}
+
+.js-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.js-animate.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 600px) {
-  .container {
-    padding: 1.5rem;
-    margin: 1.5rem;
+  header {
+    padding-top: 4.5rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
-
-  nav a {
-    display: inline-block;
-    margin: 0.5rem 0.75rem;
+  header h1 {
+    font-size: 1.5rem;
   }
-
-  .services {
-    grid-template-columns: 1fr;
-  }
-
-  .testimonials {
-    flex-direction: column;
-    gap: 2rem;
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
   }
 }
